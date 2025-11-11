@@ -1,0 +1,7 @@
+sqlfluff
+snowflake-connector-python
+python-dotenv
+pandas
+boto3
+streamlit
+sqlparse
