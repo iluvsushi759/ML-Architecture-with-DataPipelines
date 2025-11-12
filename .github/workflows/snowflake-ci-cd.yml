@@ -1,36 +1,23 @@
 name: Snowflake CI/CD
 
 on:
-  # CI triggers (dev work)
   push:
     branches:
       - dev
-      - feature/**  # optional: support feature branches too
-
-  # CD trigger (after PR merge to main)
-  pull_request:
-    branches:
-      - main
-    types: [closed]  # triggers when PR is merged/closed
-
-  workflow_dispatch: # manual trigger option
-    inputs:
-      target:
-        description: 'Environment to deploy (dev or prod)'
-        required: false
-        default: 'dev'
+      - main   # CD runs on push/merge to main
+  workflow_dispatch: # optional manual trigger
 
 env:
-  SQL_DIR: sql
+  SQL_DIR: sql   # adjust path if needed
 
 jobs:
   # ------------------------
-  # CI: DEV / Staging
+  # CI: Dev / Staging
   # ------------------------
   ci_dev:
     name: CI - DEV Schema
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/dev' || startsWith(github.ref, 'refs/heads/feature/')
+    if: github.ref == 'refs/heads/dev'
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -45,13 +32,13 @@ jobs:
           python -m venv venv
           source venv/bin/activate
           pip install --upgrade pip
-          pip install -r requirements.txt
+          pip install sqlfluff snowflake-connector-python
           pip check
 
       - name: Lint SQL files
         run: |
           source venv/bin/activate
-          sqlfluff lint "${{ env.SQL_DIR }}/" --dialect snowflake || true
+          sqlfluff lint "${SQL_DIR}/" --dialect snowflake || true
 
       - name: Run SQL scripts in DEV
         env:
@@ -66,18 +53,51 @@ jobs:
           TARGET_SCHEMA: DEV
         run: |
           source venv/bin/activate
-          python scripts/run_sql.py
+          python - <<'PY'
+          import os, snowflake.connector
+          conn = snowflake.connector.connect(
+              user=os.environ['SNOWFLAKE_USER'],
+              password=os.environ['SNOWFLAKE_PASSWORD'],
+              account=os.environ['SNOWFLAKE_ACCOUNT'],
+              warehouse=os.environ['SNOWFLAKE_WAREHOUSE'],
+              database=os.environ['SNOWFLAKE_DATABASE'],
+              schema=os.environ['SNOWFLAKE_SCHEMA'],
+              role=os.environ.get('SNOWFLAKE_ROLE')
+          )
+          cur = conn.cursor()
+          sql_dir = os.environ['SQL_DIR']
+          target_schema = os.environ['TARGET_SCHEMA']
+          ordered_files = [
+              "01_create_stages.sql",
+              "02_load_raw_data.sql",
+              "03_transform_data.sql",
+              "04_data_quality_checks.sql"
+          ]
+          for file in ordered_files:
+              path = f"{sql_dir}/{file}"
+              if os.path.isfile(path):
+                  print(f"🚀 Running {file} in DEV ({target_schema})")
+                  with open(path, 'r') as f:
+                      sql = f.read().replace('${TARGET_SCHEMA}', target_schema)
+                      for stmt in sql.split(';'):
+                          if stmt.strip():
+                              cur.execute(stmt)
+              else:
+                  print(f"⚠️ Skipping {file} (not found)")
+          cur.close()
+          conn.close()
+          PY
 
   # ------------------------
-  # CD: Production (after PR merge)
+  # CD: Production
   # ------------------------
   cd_prod:
     name: CD - PRESENTATION Schema
     runs-on: ubuntu-latest
     needs: ci_dev
-    if: github.event.pull_request.merged == true && github.base_ref == 'main'
+    if: github.ref == 'refs/heads/main'   # <-- only runs on push/merge to main
     environment:
-      name: production
+      name: production   # <-- requires manual approval before running
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -92,7 +112,7 @@ jobs:
           python -m venv venv
           source venv/bin/activate
           pip install --upgrade pip
-          pip install -r requirements.txt
+          pip install snowflake-connector-python
           pip check
 
       - name: Run SQL scripts in PRESENTATION
@@ -108,4 +128,37 @@ jobs:
           TARGET_SCHEMA: PRESENTATION
         run: |
           source venv/bin/activate
-          python scripts/run_sql.py
+          python - <<'PY'
+          import os, snowflake.connector
+          conn = snowflake.connector.connect(
+              user=os.environ['SNOWFLAKE_USER'],
+              password=os.environ['SNOWFLAKE_PASSWORD'],
+              account=os.environ['SNOWFLAKE_ACCOUNT'],
+              warehouse=os.environ['SNOWFLAKE_WAREHOUSE'],
+              database=os.environ['SNOWFLAKE_DATABASE'],
+              schema=os.environ['SNOWFLAKE_SCHEMA'],
+              role=os.environ.get('SNOWFLAKE_ROLE')
+          )
+          cur = conn.cursor()
+          sql_dir = os.environ['SQL_DIR']
+          target_schema = os.environ['TARGET_SCHEMA']
+          ordered_files = [
+              "01_create_stages.sql",
+              "02_load_raw_data.sql",
+              "03_transform_data.sql",
+              "04_data_quality_checks.sql"
+          ]
+          for file in ordered_files:
+              path = f"{sql_dir}/{file}"
+              if os.path.isfile(path):
+                  print(f"🚀 Running {file} in PROD ({target_schema})")
+                  with open(path, 'r') as f:
+                      sql = f.read().replace('${TARGET_SCHEMA}', target_schema)
+                      for stmt in sql.split(';'):
+                          if stmt.strip():
+                              cur.execute(stmt)
+              else:
+                  print(f"⚠️ Skipping {file} (not found)")
+          cur.close()
+          conn.close()
+          PY
