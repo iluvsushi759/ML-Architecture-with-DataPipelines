@@ -143,10 +143,12 @@ jobs:
           sql_dir = os.environ['SQL_DIR']
           target_schema = os.environ['TARGET_SCHEMA']
           ordered_files = [
-              "01_create_stages.sql",
-              "02_load_raw_data.sql",
-              "03_transform_data.sql",
-              "04_data_quality_checks.sql"
+              "00_create_schemas.sql",
+              "01_create_tables.sql",
+              "02_load_raw.sql",
+              "03_transform.sql",
+              "04_merge_into_presentation.sql",
+              "05_data_quality_checks.sql"
           ]
           for file in ordered_files:
               path = f"{sql_dir}/{file}"
