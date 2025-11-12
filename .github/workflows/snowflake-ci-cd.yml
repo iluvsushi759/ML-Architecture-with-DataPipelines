@@ -1,11 +1,12 @@
 name: Snowflake CI/CD
 
 on:
+  # CI triggers
   push:
-    branches: [ dev, main ]
-  pull_request:
-    branches: [ main ]
-  workflow_dispatch:
+    branches:
+      - dev
+      - main   # <-- ensures CD runs on push/merge to main
+  workflow_dispatch: # optional manual trigger
 
 env:
   SQL_DIR: sql
@@ -56,16 +57,15 @@ jobs:
           python scripts/run_sql.py
 
   # ------------------------
-  # CD: Production via PR or push to main
+  # CD: Production
   # ------------------------
   cd_prod:
     name: CD - PRESENTATION Schema
     runs-on: ubuntu-latest
     needs: ci_dev
-    if: startsWith(github.ref, 'refs/heads/main') || github.event.pull_request.base.ref == 'main'
-    # Uncomment this block if you want GitHub to enforce deployment approvals
+    if: github.ref == 'refs/heads/main'   # <-- only runs on push/merge to main
     # environment:
-    #   name: production
+    #   name: production   # uncomment if you want approval gating
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
