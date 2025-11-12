@@ -1,0 +1,99 @@
+name: Snowflake CI/CD
+
+on:
+  push:
+    branches: [ dev, main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+env:
+  SQL_DIR: sql
+
+jobs:
+  # ------------------------
+  # CI: Dev / Staging
+  # ------------------------
+  ci_dev:
+    name: CI - DEV Schema
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/dev'
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          python -m venv venv
+          source venv/bin/activate
+          pip install --upgrade pip
+          pip install -r requirements.txt
+          pip check
+
+      - name: Lint SQL files
+        run: |
+          source venv/bin/activate
+          sqlfluff lint "${{ env.SQL_DIR }}/" --dialect snowflake || true
+
+      - name: Run SQL scripts in DEV (no merge)
+        env:
+          SNOWFLAKE_ACCOUNT: ${{ secrets.SNOWFLAKE_ACCOUNT }}
+          SNOWFLAKE_USER: ${{ secrets.SNOWFLAKE_USER }}
+          SNOWFLAKE_PASSWORD: ${{ secrets.SNOWFLAKE_PASSWORD }}
+          SNOWFLAKE_WAREHOUSE: ${{ secrets.SNOWFLAKE_WAREHOUSE }}
+          SNOWFLAKE_DATABASE: ${{ secrets.SNOWFLAKE_DATABASE }}
+          SNOWFLAKE_SCHEMA: DEV
+          SNOWFLAKE_ROLE: ${{ secrets.SNOWFLAKE_ROLE }}
+          SQL_DIR: ${{ env.SQL_DIR }}
+          TARGET_SCHEMA: DEV
+        run: |
+          source venv/bin/activate
+          python scripts/run_sql.py
+
+  # ------------------------
+  # CD: Production via PR or push to main
+  # ------------------------
+  cd_prod:
+    name: CD - PRESENTATION Schema
+    runs-on: ubuntu-latest
+    needs: ci_dev
+    if: github.ref == 'refs/heads/main' || (github.event_name == 'pull_request' && github.base_ref == 'main')
+    # Uncomment this block if you want GitHub to enforce deployment approvals
+    # environment:
+    #   name: production
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          python -m venv venv
+          source venv/bin/activate
+          pip install --upgrade pip
+          pip install -r requirements.txt
+          pip check
+
+      - name: Run SQL scripts in PRESENTATION (includes merge + checks)
+        env:
+          SNOWFLAKE_ACCOUNT: ${{ secrets.SNOWFLAKE_ACCOUNT }}
+          SNOWFLAKE_USER: ${{ secrets.SNOWFLAKE_USER }}
+          SNOWFLAKE_PASSWORD: ${{ secrets.SNOWFLAKE_PASSWORD }}
+          SNOWFLAKE_WAREHOUSE: ${{ secrets.SNOWFLAKE_WAREHOUSE }}
+          SNOWFLAKE_DATABASE: ${{ secrets.SNOWFLAKE_DATABASE }}
+          SNOWFLAKE_SCHEMA: PRESENTATION
+          SNOWFLAKE_ROLE: ${{ secrets.SNOWFLAKE_ROLE }}
+          SQL_DIR: ${{ env.SQL_DIR }}
+          TARGET_SCHEMA: PRESENTATION
+        run: |
+          source venv/bin/activate
+          python scripts/run_sql.py
