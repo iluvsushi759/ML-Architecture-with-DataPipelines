@@ -5,7 +5,7 @@ on:
   push:
     branches:
       - dev
-      - main   # <-- ensures CD runs on push/merge to main
+      - main   # <-- ensures CD runs only on push/merge to main
   workflow_dispatch: # optional manual trigger
 
 env:
