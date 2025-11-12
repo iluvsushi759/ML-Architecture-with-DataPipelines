@@ -4,6 +4,7 @@ on:
   push:
     branches: [ dev, main ]
   pull_request:
+    types: [closed]   # only triggers on PR close
     branches: [ main ]
   workflow_dispatch:
 
@@ -56,15 +57,13 @@ jobs:
           python scripts/run_sql.py
 
   # ------------------------
-  # CD: Production via PR to main
+  # CD: Production (after PR merge)
   # ------------------------
   cd_prod:
     name: CD - PRESENTATION Schema
     runs-on: ubuntu-latest
     needs: ci_dev
-    if: github.ref == 'refs/heads/main'
-    #environment:
-      #name: production
+    if: github.event.pull_request.merged == true   # only run if PR was merged
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
