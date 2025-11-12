@@ -81,9 +81,9 @@ jobs:
                   print(f"🚀 Running {file} in DEV ({target_schema})")
                   with open(path, 'r') as f:
                       sql = f.read().replace('${TARGET_SCHEMA}', target_schema)
-                      for stmt in sql.split(';'):
-                          if stmt.strip():
-                              cur.execute(stmt)
+                      # ✅ Safe parser: ignore blank lines and empty SQL
+                      for stmt in [s.strip() for s in sql.split(';') if s.strip()]:
+                          cur.execute(stmt)
               else:
                   print(f"⚠️ Skipping {file} (not found)")
           cur.close()
@@ -158,9 +158,9 @@ jobs:
                   print(f"🚀 Running {file} in PROD ({target_schema})")
                   with open(path, 'r') as f:
                       sql = f.read().replace('${TARGET_SCHEMA}', target_schema)
-                      for stmt in sql.split(';'):
-                          if stmt.strip():
-                              cur.execute(stmt)
+                      # ✅ Safe parser: ignore blank lines and empty SQL
+                      for stmt in [s.strip() for s in sql.split(';') if s.strip()]:
+                          cur.execute(stmt)
               else:
                   print(f"⚠️ Skipping {file} (not found)")
           cur.close()
