@@ -62,7 +62,7 @@ jobs:
     name: CD - PRESENTATION Schema
     runs-on: ubuntu-latest
     needs: ci_dev
-    if: github.ref == 'refs/heads/main' || (github.event_name == 'pull_request' && github.base_ref == 'main')
+    if: startsWith(github.ref, 'refs/heads/main') || github.event.pull_request.base.ref == 'main'
     # Uncomment this block if you want GitHub to enforce deployment approvals
     # environment:
     #   name: production
