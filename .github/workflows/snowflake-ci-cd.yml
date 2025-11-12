@@ -41,7 +41,7 @@ jobs:
           source venv/bin/activate
           sqlfluff lint "${{ env.SQL_DIR }}/" --dialect snowflake || true
 
-      - name: Run SQL scripts in DEV (no merge)
+      - name: Run SQL scripts in DEV
         env:
           SNOWFLAKE_ACCOUNT: ${{ secrets.SNOWFLAKE_ACCOUNT }}
           SNOWFLAKE_USER: ${{ secrets.SNOWFLAKE_USER }}
@@ -64,8 +64,8 @@ jobs:
     runs-on: ubuntu-latest
     needs: ci_dev
     if: github.ref == 'refs/heads/main'   # <-- only runs on push/merge to main
-    # environment:
-    #   name: production   # uncomment if you want approval gating
+    environment:
+      name: production   # <-- requires manual approval before running
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -83,7 +83,7 @@ jobs:
           pip install -r requirements.txt
           pip check
 
-      - name: Run SQL scripts in PRESENTATION (includes merge + checks)
+      - name: Run SQL scripts in PRESENTATION
         env:
           SNOWFLAKE_ACCOUNT: ${{ secrets.SNOWFLAKE_ACCOUNT }}
           SNOWFLAKE_USER: ${{ secrets.SNOWFLAKE_USER }}
