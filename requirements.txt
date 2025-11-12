@@ -5,3 +5,13 @@ pandas
 boto3
 streamlit
 sqlparse
+sagemaker
+joblib
+scikit-learn
+xgboost
+langchain
+sentence-transformers
+faiss-cpu
+# Optional (only if you want cloud LLMs)
+openai
+pinecone-client
