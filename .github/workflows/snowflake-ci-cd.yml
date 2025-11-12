@@ -18,6 +18,7 @@ jobs:
   ci_dev:
     name: CI - DEV Schema
     runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/dev'
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -32,13 +33,13 @@ jobs:
           python -m venv venv
           source venv/bin/activate
           pip install --upgrade pip
-          pip install sqlfluff snowflake-connector-python
+          pip install -r requirements.txt
           pip check
 
       - name: Lint SQL files
         run: |
           source venv/bin/activate
-          sqlfluff lint "${SQL_DIR}/" --dialect snowflake || true
+          sqlfluff lint "${{ env.SQL_DIR }}/" --dialect snowflake || true
 
       - name: Run SQL scripts in DEV
         env:
@@ -53,35 +54,7 @@ jobs:
           TARGET_SCHEMA: DEV
         run: |
           source venv/bin/activate
-          python - <<'PY'
-          import os, snowflake.connector
-          conn = snowflake.connector.connect(
-              user=os.environ['SNOWFLAKE_USER'],
-              password=os.environ['SNOWFLAKE_PASSWORD'],
-              account=os.environ['SNOWFLAKE_ACCOUNT'],
-              warehouse=os.environ['SNOWFLAKE_WAREHOUSE'],
-              database=os.environ['SNOWFLAKE_DATABASE'],
-              schema=os.environ['SNOWFLAKE_SCHEMA'],
-              role=os.environ.get('SNOWFLAKE_ROLE')
-          )
-          cur = conn.cursor()
-          sql_dir = os.environ['SQL_DIR']
-          target_schema = os.environ['TARGET_SCHEMA']
-          ordered_files = ["01_create_tables.sql", "02_seed_data.sql", "03_transform.sql", "04_data_quality_checks.sql"]
-          for file in ordered_files:
-              path = f"{sql_dir}/{file}"
-              if os.path.isfile(path):
-                  print(f"🚀 Running {file} in DEV ({target_schema})")
-                  with open(path, 'r') as f:
-                      sql = f.read().replace('${TARGET_SCHEMA}', target_schema)
-                      for stmt in sql.split(';'):
-                          if stmt.strip():
-                              cur.execute(stmt)
-              else:
-                  print(f"⚠️ Skipping {file} (not found)")
-          cur.close()
-          conn.close()
-          PY
+          python scripts/run_sql.py
 
   # ------------------------
   # CD: Production
@@ -107,7 +80,8 @@ jobs:
           python -m venv venv
           source venv/bin/activate
           pip install --upgrade pip
-          pip install snowflake-connector-python
+          pip install -r requirements.txt
+          pip check
 
       - name: Run SQL scripts in PRESENTATION
         env:
@@ -122,32 +96,4 @@ jobs:
           TARGET_SCHEMA: PRESENTATION
         run: |
           source venv/bin/activate
-          python - <<'PY'
-          import os, snowflake.connector
-          conn = snowflake.connector.connect(
-              user=os.environ['SNOWFLAKE_USER'],
-              password=os.environ['SNOWFLAKE_PASSWORD'],
-              account=os.environ['SNOWFLAKE_ACCOUNT'],
-              warehouse=os.environ['SNOWFLAKE_WAREHOUSE'],
-              database=os.environ['SNOWFLAKE_DATABASE'],
-              schema=os.environ['SNOWFLAKE_SCHEMA'],
-              role=os.environ.get('SNOWFLAKE_ROLE')
-          )
-          cur = conn.cursor()
-          sql_dir = os.environ['SQL_DIR']
-          target_schema = os.environ['TARGET_SCHEMA']
-          ordered_files = ["01_create_tables.sql", "02_seed_data.sql", "03_transform.sql", "04_data_quality_checks.sql"]
-          for file in ordered_files:
-              path = f"{sql_dir}/{file}"
-              if os.path.isfile(path):
-                  print(f"🚀 Running {file} in PRESENTATION ({target_schema})")
-                  with open(path, 'r') as f:
-                      sql = f.read().replace('${TARGET_SCHEMA}', target_schema)
-                      for stmt in sql.split(';'):
-                          if stmt.strip():
-                              cur.execute(stmt)
-              else:
-                  print(f"⚠️ Skipping {file} (not found)")
-          cur.close()
-          conn.close()
-          PY
+          python scripts/run_sql.py
