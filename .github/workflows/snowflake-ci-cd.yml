@@ -56,15 +56,16 @@ jobs:
           python scripts/run_sql.py
 
   # ------------------------
-  # CD: Production via PR to main
+  # CD: Production via PR or push to main
   # ------------------------
   cd_prod:
     name: CD - PRESENTATION Schema
     runs-on: ubuntu-latest
     needs: ci_dev
-    if: github.ref == 'refs/heads/main'
-    #environment:
-      #name: production
+    if: github.ref == 'refs/heads/main' || (github.event_name == 'pull_request' && github.base_ref == 'main')
+    # Uncomment this block if you want GitHub to enforce deployment approvals
+    # environment:
+    #   name: production
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -80,6 +81,7 @@ jobs:
           source venv/bin/activate
           pip install --upgrade pip
           pip install -r requirements.txt
+          pip check
 
       - name: Run SQL scripts in PRESENTATION (includes merge + checks)
         env:
