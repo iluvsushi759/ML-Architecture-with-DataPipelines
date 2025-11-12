@@ -1,24 +1,36 @@
 name: Snowflake CI/CD
 
 on:
-  # CI triggers
+  # CI triggers (dev work)
   push:
     branches:
       - dev
-      - main   # <-- ensures CD runs only on push/merge to main
-  workflow_dispatch: # optional manual trigger
+      - feature/**  # optional: support feature branches too
+
+  # CD trigger (after PR merge to main)
+  pull_request:
+    branches:
+      - main
+    types: [closed]  # triggers when PR is merged/closed
+
+  workflow_dispatch: # manual trigger option
+    inputs:
+      target:
+        description: 'Environment to deploy (dev or prod)'
+        required: false
+        default: 'dev'
 
 env:
   SQL_DIR: sql
 
 jobs:
   # ------------------------
-  # CI: Dev / Staging
+  # CI: DEV / Staging
   # ------------------------
   ci_dev:
     name: CI - DEV Schema
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/dev'
+    if: github.ref == 'refs/heads/dev' || startsWith(github.ref, 'refs/heads/feature/')
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -57,15 +69,15 @@ jobs:
           python scripts/run_sql.py
 
   # ------------------------
-  # CD: Production
+  # CD: Production (after PR merge)
   # ------------------------
   cd_prod:
     name: CD - PRESENTATION Schema
     runs-on: ubuntu-latest
     needs: ci_dev
-    if: github.ref == 'refs/heads/main'   # <-- only runs on push/merge to main
+    if: github.event.pull_request.merged == true && github.base_ref == 'main'
     environment:
-      name: production   # <-- requires manual approval before running
+      name: production
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
