@@ -4,7 +4,7 @@ on:
   push:
     branches: [ dev, main ]   # CI on dev, CD on main
   pull_request:
-    branches: [ main ]        # PR checks on main
+    branches: [ main ]        # CI on PRs to main
   workflow_dispatch:
 
 env:
@@ -17,7 +17,7 @@ jobs:
   ci_dev:
     name: CI - DEV Schema
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/dev'
+    # Remove 'if' entirely so it runs on dev pushes and PRs
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -97,9 +97,9 @@ jobs:
     name: CD - PRESENTATION Schema
     runs-on: ubuntu-latest
     needs: ci_dev
-    if: github.ref == 'refs/heads/main'   # <-- CORRECTED: run on push to main
+    if: github.ref == 'refs/heads/main'   # only runs on push to main
     environment:
-      name: production   # <-- requires manual approval before running
+      name: production
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
