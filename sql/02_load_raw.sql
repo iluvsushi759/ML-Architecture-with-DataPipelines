@@ -1,39 +1,52 @@
 USE DATABASE INSURANCE_DB;
 USE SCHEMA RAW;
+
+-- Step 1: Create file format (all options belong here)
 CREATE OR REPLACE FILE FORMAT RAW.CSV_FF
-  TYPE = CSV
-  FIELD_DELIMITER = ','
-  FIELD_OPTIONALLY_ENCLOSED_BY = '"'
-  SKIP_HEADER = 1
-  EMPTY_FIELD_AS_NULL = TRUE
-  NULL_IF = ('', 'NULL')
-  DATE_FORMAT = 'MM/DD/YYYY';
--- Clear RAW tables before loading
+TYPE = CSV
+FIELD_OPTIONALLY_ENCLOSED_BY = '"'
+SKIP_HEADER = 1
+DATE_FORMAT = 'YYYY-MM-DD'  -- matches your CSV
+FIELD_DELIMITER = ',';  -- adjust to match your CSV format
+
+-- Step 2: Clear RAW tables before loading
 TRUNCATE TABLE RAW.CUSTOMERS_RAW;
 TRUNCATE TABLE RAW.HOSPITALS_RAW;
 TRUNCATE TABLE RAW.CLAIMS_RAW;
--- Load customers.csv
+
+-- Step 3: Load customers.csv
 COPY INTO RAW.CUSTOMERS_RAW
 FROM @INSURANCE_RAW_S3/customers/
 FILE_FORMAT = RAW.CSV_FF
 ON_ERROR = 'CONTINUE'
 FORCE = TRUE;
--- Load hospitals.csv
+
+-- Step 4: Load hospitals.csv
 COPY INTO RAW.HOSPITALS_RAW
 FROM @INSURANCE_RAW_S3/hospitals/
 FILE_FORMAT = RAW.CSV_FF
 ON_ERROR = 'CONTINUE'
 FORCE = TRUE;
--- Load multiple claims_*.csv files
+
+-- Step 5: Load multiple claims_*.csv files
 COPY INTO RAW.CLAIMS_RAW
 FROM @INSURANCE_RAW_S3/claims/
 FILE_FORMAT = RAW.CSV_FF
 ON_ERROR = 'CONTINUE'
 FORCE = TRUE
-PATTERN = '.*claims_.*\\.csv';
--- Optional sanity counts
+PATTERN = 'claims_.*\.csv';-- correct regex
+
+-- Step 6: Optional sanity counts
 SELECT 'CUSTOMERS_RAW' AS table_name, COUNT(*) AS row_count FROM RAW.CUSTOMERS_RAW
 UNION ALL
 SELECT 'HOSPITALS_RAW', COUNT(*) FROM RAW.HOSPITALS_RAW
 UNION ALL
 SELECT 'CLAIMS_RAW', COUNT(*) FROM RAW.CLAIMS_RAW;
+
+-- Step 7: Inspect the data
+SELECT * FROM RAW.CLAIMS_RAW;
+SELECT * FROM RAW.CUSTOMERS_RAW;
+SELECT * FROM RAW.HOSPITALS_RAW;
+
+-- Step 8: Check stages
+SHOW STAGES;
