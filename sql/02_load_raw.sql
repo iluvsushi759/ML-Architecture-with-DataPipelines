@@ -1,6 +1,5 @@
 USE DATABASE INSURANCE_DB;
 USE SCHEMA RAW;
-
 -- Step 1: Create file format (all options belong here)
 CREATE OR REPLACE FILE FORMAT RAW.CSV_FF
 TYPE = CSV
@@ -8,45 +7,38 @@ FIELD_OPTIONALLY_ENCLOSED_BY = '"'
 SKIP_HEADER = 1
 DATE_FORMAT = 'YYYY-MM-DD'  -- matches your CSV
 FIELD_DELIMITER = ',';  -- adjust to match your CSV format
-
 -- Step 2: Clear RAW tables before loading
 TRUNCATE TABLE RAW.CUSTOMERS_RAW;
 TRUNCATE TABLE RAW.HOSPITALS_RAW;
 TRUNCATE TABLE RAW.CLAIMS_RAW;
-
 -- Step 3: Load customers.csv
 COPY INTO RAW.CUSTOMERS_RAW
 FROM @INSURANCE_RAW_S3/customers/
 FILE_FORMAT = RAW.CSV_FF
 ON_ERROR = 'CONTINUE'
 FORCE = TRUE;
-
 -- Step 4: Load hospitals.csv
 COPY INTO RAW.HOSPITALS_RAW
 FROM @INSURANCE_RAW_S3/hospitals/
 FILE_FORMAT = RAW.CSV_FF
 ON_ERROR = 'CONTINUE'
 FORCE = TRUE;
-
 -- Step 5: Load multiple claims_*.csv files
 COPY INTO RAW.CLAIMS_RAW
 FROM @INSURANCE_RAW_S3/claims/
 FILE_FORMAT = RAW.CSV_FF
 ON_ERROR = 'CONTINUE'
 FORCE = TRUE
-PATTERN = 'claims_.*\.csv';-- correct regex
-
+PATTERN = 'claims*\.csv';-- correct regex
 -- Step 6: Optional sanity counts
 SELECT 'CUSTOMERS_RAW' AS table_name, COUNT(*) AS row_count FROM RAW.CUSTOMERS_RAW
 UNION ALL
 SELECT 'HOSPITALS_RAW', COUNT(*) FROM RAW.HOSPITALS_RAW
 UNION ALL
 SELECT 'CLAIMS_RAW', COUNT(*) FROM RAW.CLAIMS_RAW;
-
 -- Step 7: Inspect the data
 SELECT * FROM RAW.CLAIMS_RAW;
 SELECT * FROM RAW.CUSTOMERS_RAW;
 SELECT * FROM RAW.HOSPITALS_RAW;
-
 -- Step 8: Check stages
 SHOW STAGES;

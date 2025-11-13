@@ -27,7 +27,7 @@ def build_training_set():
       cu.AGE,
       CASE WHEN cu.GENDER = 'Male' THEN 1 WHEN cu.GENDER = 'Female' THEN 0 ELSE NULL END AS GENDER_BIN,
       cu.PLAN_TYPE,
-      h.RATING AS HOSPITAL_RATING,
+      h.BASE_RATING AS HOSPITAL_RATING,
       c.CLAIM_TYPE,
       c.STATUS,
       c.CLAIM_AMOUNT

@@ -15,6 +15,7 @@ conn = snowflake.connector.connect(
 cur = conn.cursor()
 sql_dir = os.environ['SQL_DIR']
 target_schema = os.environ['TARGET_SCHEMA']
+# This is a fallback default if the environment variable isn’t set. I'mm doing this in case someone runs this script locally and not via .yml
 
 # Ordered execution of SQL files
 ordered_files = [
