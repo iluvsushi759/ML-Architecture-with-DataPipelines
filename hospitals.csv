@@ -1,0 +1,501 @@
+HOSPITAL_ID,NAME,CITY,RATING
+1,Chicago City Medical Center,Chicago,5
+2,Miami City Medical Center,Los Angeles,3
+3,Houston Regional Clinic,Boston,1
+4,Houston HealthCare Institute,San Francisco,2
+5,Boston Regional Clinic,Denver,4
+6,San Francisco City Medical Center,Seattle,5
+7,Houston General Hospital,Miami,1
+8,Los Angeles Community Hospital,San Francisco,1
+9,Boston HealthCare Institute,Boston,1
+10,Seattle Community Hospital,Boston,5
+11,New York Community Hospital,Chicago,4
+12,Denver General Hospital,Atlanta,5
+13,Chicago HealthCare Institute,Boston,4
+14,Boston Regional Clinic,Denver,3
+15,Los Angeles General Hospital,Atlanta,4
+16,New York General Hospital,Seattle,3
+17,Seattle City Medical Center,Miami,3
+18,Denver Community Hospital,Boston,1
+19,Boston Regional Clinic,Atlanta,3
+20,Seattle City Medical Center,New York,2
+21,Houston City Medical Center,Miami,1
+22,San Francisco City Medical Center,Los Angeles,5
+23,Seattle HealthCare Institute,Miami,2
+24,Houston Regional Clinic,Chicago,4
+25,Atlanta HealthCare Institute,Houston,2
+26,Boston Regional Clinic,Houston,3
+27,San Francisco City Medical Center,New York,1
+28,Denver HealthCare Institute,Houston,2
+29,Boston HealthCare Institute,Denver,4
+30,Seattle Regional Clinic,Miami,5
+31,Miami City Medical Center,New York,3
+32,Denver City Medical Center,Seattle,1
+33,Boston General Hospital,Denver,5
+34,Los Angeles HealthCare Institute,Boston,5
+35,Chicago General Hospital,Atlanta,2
+36,Houston City Medical Center,Seattle,2
+37,New York City Medical Center,Los Angeles,5
+38,Houston HealthCare Institute,Los Angeles,1
+39,Los Angeles HealthCare Institute,Boston,3
+40,Miami Regional Clinic,Chicago,5
+41,Boston Regional Clinic,Chicago,1
+42,New York Regional Clinic,Atlanta,1
+43,San Francisco HealthCare Institute,Atlanta,2
+44,Atlanta Community Hospital,Chicago,2
+45,Denver General Hospital,Chicago,5
+46,Seattle HealthCare Institute,Los Angeles,1
+47,New York Regional Clinic,Chicago,2
+48,Los Angeles Community Hospital,Boston,3
+49,San Francisco HealthCare Institute,Denver,4
+50,Boston Regional Clinic,Seattle,5
+51,Los Angeles General Hospital,Denver,2
+52,Miami Regional Clinic,Denver,3
+53,Seattle City Medical Center,Los Angeles,5
+54,Miami Community Hospital,Los Angeles,5
+55,San Francisco Regional Clinic,Chicago,2
+56,New York General Hospital,Denver,1
+57,Chicago City Medical Center,New York,1
+58,Atlanta General Hospital,Seattle,3
+59,Houston City Medical Center,New York,3
+60,Miami City Medical Center,Atlanta,4
+61,Seattle HealthCare Institute,New York,3
+62,Chicago Regional Clinic,Los Angeles,4
+63,Boston Community Hospital,Atlanta,5
+64,Chicago Community Hospital,Seattle,4
+65,New York City Medical Center,Atlanta,4
+66,Boston City Medical Center,Los Angeles,4
+67,Seattle Community Hospital,Boston,5
+68,Los Angeles Community Hospital,Atlanta,2
+69,Seattle General Hospital,Houston,4
+70,Los Angeles City Medical Center,Los Angeles,5
+71,Miami Community Hospital,Atlanta,4
+72,Miami Community Hospital,Los Angeles,3
+73,New York Community Hospital,Chicago,4
+74,Boston Regional Clinic,Seattle,5
+75,Los Angeles City Medical Center,Denver,3
+76,Los Angeles City Medical Center,Seattle,5
+77,Denver Community Hospital,San Francisco,5
+78,Houston General Hospital,Denver,2
+79,Atlanta General Hospital,Atlanta,5
+80,Boston HealthCare Institute,Seattle,2
+81,Seattle City Medical Center,New York,4
+82,Boston City Medical Center,San Francisco,3
+83,Los Angeles Community Hospital,Atlanta,3
+84,Los Angeles HealthCare Institute,Seattle,4
+85,Denver HealthCare Institute,Denver,3
+86,Denver Regional Clinic,Boston,1
+87,Houston General Hospital,Chicago,2
+88,Chicago Community Hospital,Chicago,4
+89,Boston General Hospital,Denver,5
+90,Miami HealthCare Institute,Atlanta,4
+91,Denver General Hospital,Seattle,4
+92,Atlanta HealthCare Institute,Denver,1
+93,Miami General Hospital,Boston,3
+94,Denver General Hospital,Miami,1
+95,Miami HealthCare Institute,Seattle,4
+96,Miami Regional Clinic,Los Angeles,2
+97,Atlanta Regional Clinic,Los Angeles,5
+98,New York City Medical Center,Boston,3
+99,San Francisco Regional Clinic,Boston,2
+100,Los Angeles City Medical Center,San Francisco,1
+101,San Francisco General Hospital,Denver,5
+102,Houston Regional Clinic,Denver,4
+103,Denver Regional Clinic,Denver,4
+104,Denver HealthCare Institute,Denver,3
+105,Los Angeles HealthCare Institute,San Francisco,2
+106,Chicago Regional Clinic,Los Angeles,2
+107,Houston HealthCare Institute,Denver,4
+108,Boston Community Hospital,Los Angeles,3
+109,Houston General Hospital,Boston,4
+110,Atlanta HealthCare Institute,San Francisco,3
+111,New York Community Hospital,New York,4
+112,Denver HealthCare Institute,Miami,4
+113,Atlanta Community Hospital,Chicago,5
+114,Miami General Hospital,Boston,4
+115,Miami City Medical Center,New York,2
+116,Seattle Community Hospital,Atlanta,5
+117,Atlanta Community Hospital,Atlanta,1
+118,Miami City Medical Center,Chicago,1
+119,Los Angeles City Medical Center,Houston,3
+120,Miami City Medical Center,Houston,2
+121,Denver Community Hospital,New York,2
+122,Chicago General Hospital,Houston,5
+123,Boston Regional Clinic,Houston,2
+124,New York General Hospital,Chicago,5
+125,Miami City Medical Center,Miami,2
+126,Chicago Community Hospital,Chicago,2
+127,New York Regional Clinic,New York,3
+128,Miami Regional Clinic,Houston,2
+129,Denver Community Hospital,Atlanta,5
+130,New York City Medical Center,Chicago,2
+131,Atlanta HealthCare Institute,New York,4
+132,Atlanta Community Hospital,Chicago,2
+133,Boston Community Hospital,San Francisco,4
+134,Atlanta Community Hospital,New York,5
+135,Houston HealthCare Institute,Chicago,2
+136,Los Angeles City Medical Center,Seattle,2
+137,Seattle Community Hospital,Atlanta,3
+138,Atlanta HealthCare Institute,New York,3
+139,Seattle HealthCare Institute,Seattle,5
+140,Chicago General Hospital,New York,5
+141,Denver Community Hospital,Los Angeles,4
+142,Boston Regional Clinic,Miami,4
+143,Boston City Medical Center,Los Angeles,4
+144,Los Angeles General Hospital,Chicago,3
+145,Denver Community Hospital,Boston,4
+146,Seattle General Hospital,Atlanta,5
+147,Houston Regional Clinic,Chicago,2
+148,San Francisco Community Hospital,Seattle,2
+149,Denver Community Hospital,Boston,1
+150,Los Angeles HealthCare Institute,San Francisco,4
+151,Denver City Medical Center,Miami,4
+152,Miami City Medical Center,Chicago,3
+153,Miami City Medical Center,San Francisco,2
+154,Atlanta General Hospital,Houston,1
+155,Atlanta City Medical Center,San Francisco,2
+156,Los Angeles General Hospital,Chicago,2
+157,Denver HealthCare Institute,Denver,1
+158,Denver HealthCare Institute,Seattle,3
+159,Houston Community Hospital,Los Angeles,1
+160,New York City Medical Center,Boston,4
+161,Chicago City Medical Center,Houston,2
+162,Atlanta Community Hospital,Miami,4
+163,Miami Community Hospital,Chicago,1
+164,Los Angeles General Hospital,Los Angeles,2
+165,Seattle General Hospital,Houston,5
+166,Chicago Regional Clinic,Chicago,5
+167,Los Angeles City Medical Center,Houston,1
+168,Denver Community Hospital,Los Angeles,1
+169,San Francisco Regional Clinic,Chicago,5
+170,Boston HealthCare Institute,Atlanta,4
+171,Atlanta Community Hospital,Boston,5
+172,Seattle General Hospital,Boston,2
+173,Chicago Community Hospital,San Francisco,5
+174,Chicago HealthCare Institute,Miami,5
+175,New York Regional Clinic,Miami,1
+176,Houston HealthCare Institute,Denver,5
+177,San Francisco General Hospital,Atlanta,1
+178,Seattle General Hospital,Seattle,3
+179,Chicago General Hospital,San Francisco,2
+180,Denver Regional Clinic,Atlanta,5
+181,Denver Community Hospital,New York,5
+182,Miami HealthCare Institute,Miami,5
+183,San Francisco Community Hospital,Miami,2
+184,Miami General Hospital,Chicago,2
+185,New York General Hospital,New York,3
+186,Los Angeles Regional Clinic,Chicago,4
+187,Boston Regional Clinic,Atlanta,4
+188,San Francisco Regional Clinic,Atlanta,1
+189,Miami HealthCare Institute,Los Angeles,2
+190,Denver Regional Clinic,Chicago,5
+191,Miami Community Hospital,Chicago,1
+192,Houston General Hospital,San Francisco,1
+193,Boston General Hospital,Miami,5
+194,Denver City Medical Center,Miami,5
+195,Houston General Hospital,Denver,2
+196,Chicago HealthCare Institute,Seattle,1
+197,Chicago HealthCare Institute,Miami,3
+198,Chicago Regional Clinic,Denver,5
+199,Atlanta Community Hospital,Los Angeles,2
+200,New York General Hospital,Boston,1
+201,Seattle General Hospital,Boston,4
+202,Atlanta Regional Clinic,San Francisco,2
+203,Los Angeles City Medical Center,Miami,3
+204,Chicago General Hospital,Denver,2
+205,Seattle Regional Clinic,New York,4
+206,Boston HealthCare Institute,Boston,1
+207,Seattle Regional Clinic,Atlanta,4
+208,Chicago General Hospital,Houston,2
+209,Miami General Hospital,Seattle,4
+210,Chicago Regional Clinic,Miami,2
+211,Miami Community Hospital,Seattle,5
+212,Atlanta General Hospital,Miami,3
+213,New York HealthCare Institute,New York,4
+214,Chicago Regional Clinic,Chicago,4
+215,Houston General Hospital,Seattle,4
+216,Denver HealthCare Institute,Atlanta,5
+217,Chicago General Hospital,Boston,2
+218,Atlanta Regional Clinic,Houston,1
+219,Denver Community Hospital,Boston,4
+220,Denver City Medical Center,Denver,4
+221,Seattle General Hospital,Denver,3
+222,Seattle Regional Clinic,Houston,3
+223,Atlanta Regional Clinic,Los Angeles,1
+224,Los Angeles City Medical Center,Atlanta,5
+225,Los Angeles City Medical Center,San Francisco,3
+226,Chicago Regional Clinic,Houston,4
+227,New York City Medical Center,Seattle,3
+228,Chicago HealthCare Institute,Chicago,1
+229,Seattle HealthCare Institute,Boston,4
+230,Boston General Hospital,Houston,4
+231,Los Angeles HealthCare Institute,Seattle,4
+232,Miami City Medical Center,Atlanta,5
+233,Los Angeles Community Hospital,San Francisco,1
+234,Seattle Community Hospital,Atlanta,4
+235,Boston General Hospital,Boston,3
+236,Los Angeles HealthCare Institute,Miami,1
+237,Miami HealthCare Institute,Atlanta,5
+238,New York General Hospital,New York,1
+239,New York City Medical Center,San Francisco,3
+240,Seattle General Hospital,Los Angeles,2
+241,San Francisco General Hospital,Chicago,5
+242,Seattle Regional Clinic,Atlanta,5
+243,New York HealthCare Institute,Seattle,2
+244,Houston General Hospital,Denver,1
+245,Denver Community Hospital,Denver,4
+246,Chicago City Medical Center,Seattle,5
+247,New York Regional Clinic,Los Angeles,4
+248,New York HealthCare Institute,Chicago,5
+249,San Francisco Community Hospital,Seattle,2
+250,Seattle Regional Clinic,Los Angeles,1
+251,Seattle Community Hospital,Boston,3
+252,Atlanta City Medical Center,New York,4
+253,Houston Community Hospital,Atlanta,4
+254,Atlanta Regional Clinic,Seattle,2
+255,Houston Community Hospital,San Francisco,1
+256,New York City Medical Center,San Francisco,4
+257,Miami Regional Clinic,Chicago,5
+258,Miami Community Hospital,Los Angeles,3
+259,Boston General Hospital,Miami,5
+260,Seattle City Medical Center,Denver,4
+261,Houston General Hospital,Miami,4
+262,Miami General Hospital,Miami,2
+263,Denver Community Hospital,Boston,3
+264,Los Angeles General Hospital,Atlanta,4
+265,Houston HealthCare Institute,Los Angeles,1
+266,New York Community Hospital,Denver,1
+267,Atlanta HealthCare Institute,Seattle,3
+268,Boston HealthCare Institute,San Francisco,1
+269,New York City Medical Center,Denver,2
+270,Boston Regional Clinic,Denver,4
+271,Miami General Hospital,Houston,1
+272,Atlanta Regional Clinic,New York,2
+273,Miami General Hospital,Los Angeles,5
+274,Houston Regional Clinic,Denver,3
+275,Atlanta HealthCare Institute,New York,1
+276,San Francisco Regional Clinic,Seattle,3
+277,Boston City Medical Center,Houston,1
+278,Denver Community Hospital,New York,4
+279,Miami HealthCare Institute,Los Angeles,3
+280,Houston City Medical Center,Seattle,5
+281,Seattle Community Hospital,Denver,2
+282,New York City Medical Center,Denver,3
+283,Atlanta Regional Clinic,New York,2
+284,Denver HealthCare Institute,Los Angeles,4
+285,Atlanta General Hospital,San Francisco,4
+286,Denver General Hospital,Los Angeles,2
+287,Denver General Hospital,Denver,5
+288,San Francisco Community Hospital,Los Angeles,5
+289,Seattle Regional Clinic,New York,5
+290,Houston Community Hospital,San Francisco,1
+291,Seattle City Medical Center,Denver,5
+292,Denver Regional Clinic,Houston,5
+293,Los Angeles Community Hospital,New York,2
+294,Seattle Community Hospital,Houston,3
+295,Los Angeles HealthCare Institute,Houston,5
+296,Seattle General Hospital,Chicago,4
+297,San Francisco City Medical Center,Denver,1
+298,Atlanta Regional Clinic,Los Angeles,5
+299,Miami City Medical Center,Chicago,3
+300,Chicago General Hospital,New York,3
+301,Boston HealthCare Institute,San Francisco,5
+302,Los Angeles HealthCare Institute,Boston,2
+303,Chicago General Hospital,Miami,1
+304,Chicago Community Hospital,Atlanta,5
+305,Houston City Medical Center,Denver,5
+306,Houston HealthCare Institute,Atlanta,3
+307,Miami Regional Clinic,New York,3
+308,San Francisco Regional Clinic,Los Angeles,4
+309,Miami City Medical Center,Denver,1
+310,Boston Community Hospital,San Francisco,4
+311,Chicago HealthCare Institute,San Francisco,1
+312,Los Angeles Regional Clinic,Boston,3
+313,Denver Community Hospital,Seattle,1
+314,San Francisco General Hospital,Chicago,1
+315,Denver HealthCare Institute,Boston,4
+316,Seattle Community Hospital,San Francisco,4
+317,Denver General Hospital,Houston,1
+318,Boston Regional Clinic,Houston,4
+319,Houston General Hospital,Boston,3
+320,Atlanta Community Hospital,New York,4
+321,Los Angeles HealthCare Institute,New York,4
+322,Denver HealthCare Institute,New York,3
+323,Los Angeles Community Hospital,San Francisco,5
+324,San Francisco City Medical Center,Denver,5
+325,San Francisco General Hospital,Los Angeles,5
+326,Chicago Community Hospital,New York,2
+327,Chicago City Medical Center,New York,2
+328,Atlanta City Medical Center,Houston,2
+329,Houston Community Hospital,Houston,3
+330,Denver Regional Clinic,Miami,5
+331,Chicago General Hospital,San Francisco,4
+332,Los Angeles Community Hospital,New York,4
+333,Miami City Medical Center,Houston,1
+334,Houston Community Hospital,Boston,2
+335,Atlanta Community Hospital,Seattle,1
+336,Los Angeles City Medical Center,New York,5
+337,Los Angeles Community Hospital,Atlanta,5
+338,San Francisco General Hospital,Denver,4
+339,Denver General Hospital,Los Angeles,5
+340,Chicago Community Hospital,Miami,1
+341,Boston Regional Clinic,Miami,3
+342,Los Angeles General Hospital,Atlanta,3
+343,San Francisco City Medical Center,Miami,1
+344,San Francisco HealthCare Institute,Boston,2
+345,Miami City Medical Center,Los Angeles,2
+346,San Francisco Regional Clinic,Denver,3
+347,New York Regional Clinic,Atlanta,5
+348,Seattle General Hospital,Miami,4
+349,Los Angeles City Medical Center,Houston,2
+350,Houston City Medical Center,Atlanta,2
+351,Chicago City Medical Center,Miami,1
+352,Los Angeles Community Hospital,Miami,4
+353,San Francisco General Hospital,Chicago,4
+354,Chicago Community Hospital,Boston,4
+355,Houston Regional Clinic,San Francisco,3
+356,Houston General Hospital,New York,3
+357,Boston Community Hospital,Chicago,3
+358,San Francisco City Medical Center,San Francisco,4
+359,Denver General Hospital,New York,3
+360,Boston Regional Clinic,San Francisco,3
+361,New York Regional Clinic,Seattle,3
+362,Los Angeles HealthCare Institute,Miami,3
+363,Miami City Medical Center,Boston,2
+364,Miami City Medical Center,San Francisco,1
+365,Atlanta General Hospital,Seattle,3
+366,Los Angeles HealthCare Institute,Boston,3
+367,Chicago City Medical Center,Los Angeles,2
+368,Seattle City Medical Center,Boston,2
+369,Houston Regional Clinic,Boston,5
+370,Chicago HealthCare Institute,Houston,1
+371,Denver City Medical Center,Chicago,2
+372,Seattle City Medical Center,Denver,1
+373,Miami Community Hospital,Seattle,3
+374,New York HealthCare Institute,Houston,3
+375,Denver HealthCare Institute,Chicago,4
+376,Denver Regional Clinic,Atlanta,2
+377,Atlanta Community Hospital,Los Angeles,2
+378,Los Angeles City Medical Center,Miami,5
+379,Seattle Regional Clinic,Chicago,2
+380,Denver Regional Clinic,Atlanta,2
+381,Los Angeles Regional Clinic,Seattle,4
+382,Los Angeles General Hospital,Seattle,5
+383,San Francisco Community Hospital,Houston,5
+384,Denver City Medical Center,New York,4
+385,Boston HealthCare Institute,Chicago,2
+386,Miami HealthCare Institute,San Francisco,5
+387,Atlanta General Hospital,Houston,1
+388,Chicago City Medical Center,Houston,5
+389,Chicago Community Hospital,New York,2
+390,Los Angeles HealthCare Institute,San Francisco,5
+391,San Francisco Regional Clinic,Boston,5
+392,San Francisco Community Hospital,Miami,4
+393,Chicago HealthCare Institute,New York,2
+394,San Francisco Community Hospital,New York,5
+395,Atlanta General Hospital,Los Angeles,5
+396,Chicago General Hospital,New York,4
+397,Atlanta Community Hospital,Los Angeles,2
+398,San Francisco Regional Clinic,Chicago,3
+399,New York Regional Clinic,New York,1
+400,Chicago City Medical Center,Boston,5
+401,Atlanta Regional Clinic,Los Angeles,4
+402,Los Angeles General Hospital,Seattle,5
+403,Los Angeles HealthCare Institute,New York,1
+404,Houston HealthCare Institute,Los Angeles,2
+405,Denver City Medical Center,Seattle,1
+406,Houston General Hospital,Seattle,3
+407,Miami Community Hospital,Atlanta,2
+408,Los Angeles General Hospital,Chicago,2
+409,Chicago HealthCare Institute,Denver,5
+410,Chicago Community Hospital,Boston,3
+411,Los Angeles HealthCare Institute,New York,5
+412,Houston HealthCare Institute,San Francisco,2
+413,Houston HealthCare Institute,Denver,3
+414,San Francisco City Medical Center,Seattle,5
+415,Los Angeles City Medical Center,Denver,5
+416,Los Angeles City Medical Center,New York,3
+417,Chicago General Hospital,Chicago,5
+418,Atlanta General Hospital,New York,5
+419,Chicago HealthCare Institute,Houston,4
+420,Los Angeles HealthCare Institute,Atlanta,2
+421,Seattle General Hospital,Seattle,2
+422,New York HealthCare Institute,New York,2
+423,Atlanta Regional Clinic,Seattle,4
+424,Los Angeles Community Hospital,Houston,5
+425,New York City Medical Center,Denver,5
+426,Chicago City Medical Center,Boston,4
+427,Houston City Medical Center,Houston,2
+428,San Francisco General Hospital,Houston,1
+429,Houston City Medical Center,Atlanta,5
+430,Atlanta Regional Clinic,Seattle,3
+431,Houston HealthCare Institute,Boston,1
+432,Miami City Medical Center,Seattle,3
+433,Miami HealthCare Institute,Houston,2
+434,Los Angeles HealthCare Institute,Houston,2
+435,Seattle General Hospital,Seattle,1
+436,Seattle Regional Clinic,Seattle,5
+437,San Francisco HealthCare Institute,Chicago,1
+438,Houston General Hospital,Miami,5
+439,Houston Community Hospital,Los Angeles,5
+440,Seattle City Medical Center,Denver,1
+441,Chicago Community Hospital,Houston,3
+442,Atlanta City Medical Center,Los Angeles,4
+443,Miami HealthCare Institute,Houston,4
+444,Seattle General Hospital,New York,3
+445,Atlanta Community Hospital,Seattle,2
+446,Boston Community Hospital,Atlanta,2
+447,Seattle Community Hospital,Seattle,2
+448,Miami Community Hospital,Atlanta,1
+449,Chicago Community Hospital,Houston,5
+450,Seattle City Medical Center,Seattle,1
+451,Seattle City Medical Center,Denver,5
+452,Los Angeles Community Hospital,Denver,4
+453,Miami City Medical Center,Seattle,2
+454,Atlanta General Hospital,Chicago,3
+455,Denver General Hospital,Houston,2
+456,Atlanta City Medical Center,San Francisco,1
+457,Seattle Community Hospital,Atlanta,5
+458,Seattle City Medical Center,Los Angeles,1
+459,Seattle HealthCare Institute,Atlanta,4
+460,Boston HealthCare Institute,Houston,1
+461,Denver General Hospital,Atlanta,3
+462,Seattle HealthCare Institute,San Francisco,4
+463,Boston Regional Clinic,Los Angeles,4
+464,Atlanta Regional Clinic,Houston,2
+465,Seattle Regional Clinic,Seattle,5
+466,Atlanta Community Hospital,San Francisco,3
+467,Denver Regional Clinic,Denver,3
+468,San Francisco Community Hospital,Los Angeles,5
+469,Denver General Hospital,Atlanta,1
+470,New York Community Hospital,Houston,3
+471,Atlanta Community Hospital,San Francisco,4
+472,Los Angeles General Hospital,Atlanta,4
+473,Atlanta City Medical Center,Denver,2
+474,New York Community Hospital,Los Angeles,4
+475,Houston HealthCare Institute,Boston,3
+476,San Francisco Community Hospital,San Francisco,3
+477,Boston HealthCare Institute,Chicago,4
+478,San Francisco General Hospital,Atlanta,2
+479,Seattle General Hospital,Miami,1
+480,Miami HealthCare Institute,Seattle,4
+481,Chicago General Hospital,Chicago,1
+482,Denver Regional Clinic,Atlanta,5
+483,Chicago City Medical Center,Denver,2
+484,Denver City Medical Center,Chicago,2
+485,Chicago Regional Clinic,San Francisco,4
+486,Atlanta General Hospital,San Francisco,4
+487,Houston HealthCare Institute,Miami,5
+488,Los Angeles General Hospital,Seattle,4
+489,Miami HealthCare Institute,Seattle,2
+490,Denver City Medical Center,Los Angeles,5
+491,Boston Community Hospital,Houston,1
+492,Boston City Medical Center,Boston,3
+493,Atlanta City Medical Center,Miami,1
+494,Houston City Medical Center,Seattle,3
+495,Seattle Regional Clinic,Houston,2
+496,Atlanta Regional Clinic,Houston,1
+497,Miami Regional Clinic,Miami,3
+498,Seattle Community Hospital,Miami,5
+499,Chicago City Medical Center,Los Angeles,3
+500,Boston Community Hospital,Los Angeles,4
