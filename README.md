@@ -1,6 +1,6 @@
 **DataPipeline and ML Integration (still in process)**   
 
-this repo is a demo of how to perform CI/CD. There are the following scripts that have been created within this Repo:  
+This repo is a demo of how to perform CI/CD. There are the following scripts that have been created within this Repo:  
   
 .github/workflows/ml-ci-cd.yml  
 .github/workflows/snowflake-ci-cd.yml  
@@ -27,7 +27,7 @@ sql/03_transform.sqlsql
 sql/04_merge_into_presentation.sql  
 sql/05_data_quality_checks.sql  
   
-***data creation***  
+***Data Creation***  
 Now in regards to data, I've just generated sythetic data and exported the .csv files in the repo root.  Feel free to change them or add more.   
   
 ***Activation***  
@@ -73,7 +73,7 @@ This modular, step-by-step pipeline offers several benefits:
  - Transparency and Auditability: Each stage is visible in GitHub and traceable in CI/CD logs, ensuring full visibility into what’s deployed and why.  
  - Data Quality Assurance: The final validation step ensures that downstream consumers only interact with verified data.  
   
-**Application**  
+***Application***   
   
 This demo can be also used in other applications such as:  
   
