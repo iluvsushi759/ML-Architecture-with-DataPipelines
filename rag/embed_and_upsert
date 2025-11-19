@@ -1,0 +1,36 @@
+# embed_and_upsert.py
+import os
+import pandas as pd
+from embed import embed_texts, fetch_rows   # you already have these helpers
+from vector_store import init_store, USE_PINECONE
+
+def prepare_texts(df):
+    # create a text field for retrieval; adapt as needed
+    df['text'] = df.apply(
+        lambda r: f"Claim {r['CLAIM_ID']} customer {r['CUSTOMER_ID']} hospital {r['HOSPITAL_ID']} "
+                  f"type {r['CLAIM_TYPE']} status {r['STATUS']} amount {r['CLAIM_AMOUNT']}",
+        axis=1
+    )
+    return df
+
+def upsert_to_store(df, id_col='CLAIM_ID'):
+    texts = df['text'].astype(str).tolist()
+    embeddings = embed_texts(texts)  # returns list of vectors
+
+    store = init_store(dim=len(embeddings[0]))
+    if USE_PINECONE:
+        vectors = [(str(df[id_col].iloc[i]), embeddings[i], {"table": "CLAIMS"}) for i in range(len(df))]
+        store.upsert(vectors=vectors)
+    else:
+        import numpy as np
+        # For FAISS: store.add expects numpy array
+        store.add(np.array(embeddings))
+    print(f"Upserted {len(df)} vectors to store")
+
+if __name__ == "__main__":
+    df = fetch_rows()
+    if df.empty:
+        print("No rows to embed/upsert")
+    else:
+        df = prepare_texts(df)
+        upsert_to_store(df)

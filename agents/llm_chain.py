@@ -21,4 +21,3 @@ def generate_answer(query: str):
 
 if __name__ == "__main__":
     print(generate_answer("Which claims show unusually high amounts last week?"))
-
