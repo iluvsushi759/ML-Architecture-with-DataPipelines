@@ -1,4 +1,3 @@
-
 import optuna
 import joblib
 import numpy as np
@@ -7,6 +6,11 @@ from xgboost import XGBRegressor
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import mean_squared_error, r2_score
 from preprocess import build_training_set
+import os
+import json
+
+
+
 
 # Load training data
 X, y, feature_cols = build_training_set()
@@ -27,8 +31,6 @@ def objective(trial):
         "reg_lambda": trial.suggest_float("reg_lambda", 0.0, 2.0),
         "random_state": 42,
         "n_jobs": -1,
-        # Stronger regularization helps generalization during tuning
-        # (Optuna will still adjust them)
     }
 
     model = XGBRegressor(**params)
@@ -65,3 +67,21 @@ bundle = {
 }
 joblib.dump(bundle, "artifacts/model.joblib")
 print("\n💾 Model saved to artifacts/model.joblib")
+
+# ---------------------------------------------------------------------
+# ADDED: Write metrics.json (matches format used in train.py)
+# ---------------------------------------------------------------------
+metrics_path = os.environ.get("METRICS_PATH", "artifacts/metrics.json")
+os.makedirs(os.path.dirname(metrics_path) or ".", exist_ok=True)
+
+tmp_path = metrics_path + ".tmp"
+with open(tmp_path, "w") as f:
+    f.write(json.dumps({
+        "rmse": round(float(final_rmse), 4),
+        "r2": round(float(final_r2), 4)
+    }))
+
+os.replace(tmp_path, metrics_path)
+
+print(f"💾 Metrics saved to {metrics_path} (RMSE={final_rmse:.4f}, R²={final_r2:.4f})")
+
