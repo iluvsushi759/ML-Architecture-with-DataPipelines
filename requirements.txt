@@ -19,3 +19,4 @@ pinecone-client
 accelerate
 langchain==1.0.8
 langchain-community==0.4.1
+accelarate
