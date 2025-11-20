@@ -9,15 +9,15 @@ from langchain_text_splitters import RecursiveCharacterTextSplitter
 from transformers import AutoTokenizer, AutoModelForCausalLM, pipeline
 
 # -----------------------------
-# Snowflake config
+# Snowflake config (from environment variables)
 # -----------------------------
 SNOWFLAKE_CONFIG = {
-    "user": "iluvsushi",
-    "password": "Kamronsui1!!!!",
-    "account": "nkoyqld-toc82072",
-    "warehouse": "COMPUTE_WH",
-    "database": "INSURANCE_DB",
-    "schema": "PRESENTATION"
+    "user": os.environ["SNOWFLAKE_USER"],
+    "password": os.environ["SNOWFLAKE_PASSWORD"],
+    "account": os.environ["SNOWFLAKE_ACCOUNT"],
+    "warehouse": os.environ["SNOWFLAKE_WAREHOUSE"],
+    "database": os.environ["SNOWFLAKE_DATABASE"],
+    "schema": os.environ["SNOWFLAKE_SCHEMA"]
 }
 
 # -----------------------------
@@ -61,14 +61,14 @@ def df_to_documents(df, table_name):
     return docs
 
 # -----------------------------
-# Load scripts as documents
+# Load scripts as documents (include .py files now)
 # -----------------------------
 def load_scripts_as_documents(folder_path):
     print(f"Loading Python scripts from: {folder_path}...")
     docs = []
     for root, _, files in os.walk(folder_path):
         for file in files:
-            if file.endswith(".py"):
+            if file.endswith(".py"):  # <-- this ensures .py files are included
                 filepath = os.path.join(root, file)
                 with open(filepath, "r", encoding="utf-8") as f:
                     content = f.read()

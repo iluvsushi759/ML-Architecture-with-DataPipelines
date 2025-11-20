@@ -1,21 +1,39 @@
-import os
+# ml/inference.py
 import joblib
-import pandas as pd
+import numpy as np
+import json
+from pathlib import Path
 
-def load_model(model_path='artifacts/model.joblib'):
-    bundle = joblib.load(model_path)
-    return bundle['model'], bundle['features']
+ARTIFACTS_DIR = Path(__file__).resolve().parents[1] / "artifacts"
 
-def predict(model, feature_cols, payload: dict) -> float:
-    df = pd.DataFrame([payload])
-    for c in feature_cols:
-        if c not in df.columns:
-            df[c] = 0
-    df = df[feature_cols]
-    return float(model.predict(df)[0])
+# Load the trained model and feature columns
+MODEL_FILE = ARTIFACTS_DIR / "model.joblib"
+_model_artifact = joblib.load(MODEL_FILE)
+_model = _model_artifact["model"]
+_feature_cols = _model_artifact["features"]
 
-if __name__ == "__main__":
-    model, feature_cols = load_model(os.environ.get('MODEL_PATH', 'artifacts/model.joblib'))
-    example = {"AGE": 45, "GENDER_BIN": 1, "HOSPITAL_RATING": 4.2,
-               "PLAN_TYPE_Standard": 1, "CLAIM_TYPE_Surgery": 1, "STATUS_Approved": 1}
-    print(predict(model, feature_cols, example))
+def predict(payload=None):
+    """
+    Predict function that accepts a dict of feature values.
+    Any missing features will default to 0.
+    
+    Example usage:
+    predict({"AGE":50, "GENDER_BIN":1, "PLAN_TYPE":2})
+    """
+    if payload is None:
+        return "Error: No input provided. Provide a dict of feature values."
+
+    # If input is a JSON string, parse it
+    if isinstance(payload, str):
+        try:
+            payload = json.loads(payload)
+        except Exception as e:
+            return f"Error parsing input JSON: {e}"
+
+    # Build input row in correct feature order
+    row = [payload.get(col, 0) for col in _feature_cols]
+    row = np.array(row).reshape(1, -1)
+
+    # Run prediction
+    pred = _model.predict(row)
+    return float(pred[0])
