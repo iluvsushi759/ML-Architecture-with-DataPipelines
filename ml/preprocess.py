@@ -55,4 +55,3 @@ def build_training_set():
     X = df[feature_cols]
     y = df[target]
     return X, y, feature_cols
-
