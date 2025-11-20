@@ -1,20 +1,31 @@
-***Process Flow***  
+**Process Flow**  
     
-1. I would first advise you create a virtual environment for your python terminal.  
-2. Go to your terminal and navigate to your repo and run:  python scripts/run_sql.py  
-3. When the scripts have completed, run your training and cleaning.  The train.py will call a function with the preprocess.py to clean and further curating the data.  You can run this next:  python ml/train.py  
-4. You should receive a prompt that training is completed.  For just fast and quick answers, you can do a manual coded inference from running:  python ml/inference.py  
-5. If a dashboard with interaction is needed then you can run:  streamlit run ml/app.py  
+1. I would first advise you create a virtual environment for your python terminal and install your requirements (pip install -r requirements.txt)  
+2. The rag_setup.py credentials were hard-carded for snowflake originally.  I've changed this to use environment variable instead. So what you will need to do is run this in your Linux Terminal:  
+  
+export SNOWFLAKE_ACCOUNT='<snowflake account>' 
+export SNOWFLAKE_USER='<snowflake user>'  
+export SNOWFLAKE_PASSWORD='<snowflake password>'  
+export SNOWFLAKE_DATABASE='<snowflake database>'  
+export SNOWFLAKE_WAREHOUSE='<snowflake warehouse>'  
+export SNOWFLAKE_SCHEMA='<snowflake schema>'  
+  
+For windows terminal just change your 'export' to 'set'
+  
+3. Go to your terminal and navigate to your repo and run:  python scripts/run_sql.py  
+4. When the scripts have completed, run your training and cleaning.  The train.py will call a function with the preprocess.py to clean and further curating the data.  You can run this next:  python ml/train.py  
+5. You should receive a prompt that training is completed.  For just fast and quick answers, you can do a manual coded inference from running:  python ml/inference.py  
+6. If a dashboard with interaction is needed then you can run:  streamlit run ml/app.py  
 Feel free to get rid of the training charts but I've included them to see how well the model was doing.  I always like to see how well it's doing when making predictions.
-6. If you don't feel happy with the RMSE, I've also included an HPO script, train_optuna.py.  You can run:  python/train_optuna.py  
+7. If you don't feel happy with the RMSE, I've also included an HPO script, train_optuna.py.  You can run:  python/train_optuna.py  
 You should see an improvement with our RMSE.  I've tuned it to 50 trials.  Please feel free to to tweeked this and rerun your streamlit app.py file.  
-7. I've provided a sagemaker.py script to run on AWS Sagemaker Jupyter.  This would allow the same thing to run your train.py but with the ability to always tune your Instance size and having better library and framework compatibility.  
-
-***RAG and AI Agent Flow***  
-1. run you rag_setup.py file via typing in terminal: python ai_agents/app.py  
+8. I've provided a sagemaker.py script to run on AWS Sagemaker Jupyter.  This would allow the same thing to run your train.py but with the ability to always tune your Instance size and having better library and framework compatibility.  
+  
+**RAG and AI Agent Flow**  
+1. run your rag_setup.py file via typing in terminal: python ai_agents/app.py  
 2. Ask Away!  
   
-***Desciption of each file***  
+**Desciption of each file**  
 ***Script Sequence***  
   
 0️⃣ 00_create_schemas.sql -- yea I know. Step 0?  Well I was creating scripts and just decided to use that since I was already creating an 00 script. LOL.  This will create or replace your schemas  
@@ -29,7 +40,7 @@ You should see an improvement with our RMSE.  I've tuned it to 50 trials.  Pleas
   
 5️⃣ 05_data_quality_checks.sql -- Runs basic data validation checks (such as row counts, null checks, and data type verification) to confirm that the data was successfully loaded and transformed.  
   
-***RAG and AI Agent Description***  
+**RAG and AI Agent Description**  
   
 1️⃣ agent.py  
 Purpose: The main entry point for interacting with your RAG agent.  
@@ -83,7 +94,7 @@ What it does:
   
 ***Key note:*** More advanced than train.py—used when you want the model to be “better than default” automatically.  
   
-8️⃣ app.py  
+6️⃣  app.py  
 Purpose: Optional front-end / dashboard.  
   
 What it does:  
@@ -91,3 +102,18 @@ What it does:
 - Lets you type queries and see responses in a user-friendly way.  
   
 ***Key note:*** Not strictly needed for local CLI usage but great for demos or portfolio.  
+  
+7️⃣ inference.py  
+Purpose: Serves as the ML inference engine for predictions.  
+  
+What it does:  
+Loads the trained model and feature metadata from the saved artifacts (model.joblib).  
+Provides a predict() function that accepts input data as a dictionary (or JSON string).  
+Formats the input to match the model’s expected feature order.  
+Runs the model prediction and returns the numeric output.  
+    
+***Key note:***  
+This script is required whenever you want to make predictions from agent.py or app.py.  
+It isolates prediction logic from training, so your model can be reused without retraining.  
+Handles missing features by defaulting them to 0 and parses JSON input if needed.  
+
