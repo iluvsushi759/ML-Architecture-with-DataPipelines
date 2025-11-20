@@ -12,11 +12,11 @@ from transformers import AutoTokenizer, AutoModelForCausalLM, pipeline
 # Snowflake config
 # -----------------------------
 SNOWFLAKE_CONFIG = {
-    "user": "iluvsushi",
-    "password": "Kamronsui1!!!!",
-    "account": "nkoyqld-toc82072",
-    "warehouse": "COMPUTE_WH",
-    "database": "INSURANCE_DB",
+    "user": ",input username",
+    "password": "input password",
+    "account": "input account",
+    "warehouse": "input warehouse",
+    "database": "input database",
     "schema": "PRESENTATION"
 }
 
