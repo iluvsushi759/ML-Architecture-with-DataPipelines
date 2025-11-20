@@ -28,3 +28,4 @@ def get_metrics():
     metrics_file = ARTIFACTS_DIR / "metrics.json"
     with open(metrics_file) as f:
         return json.load(f)
+    
