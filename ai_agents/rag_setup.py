@@ -7,7 +7,7 @@ from langchain_community.llms import HuggingFacePipeline
 from langchain_classic.chains import RetrievalQA
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from transformers import AutoTokenizer, AutoModelForCausalLM, pipeline
-
+  
 # -----------------------------
 # Snowflake config (from environment variables)
 # -----------------------------
