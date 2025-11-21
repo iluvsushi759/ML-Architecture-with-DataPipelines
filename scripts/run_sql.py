@@ -13,8 +13,21 @@ conn = snowflake.connector.connect(
 )
 
 cur = conn.cursor()
-sql_dir = os.environ['SQL_DIR']
-target_schema = os.environ['TARGET_SCHEMA']
+
+# -------------------------
+# SQL Directory (auto-detect)
+# -------------------------
+BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+DEFAULT_SQL_DIR = os.path.join(BASE_DIR, "sql")
+
+sql_dir = os.environ.get("SQL_DIR", DEFAULT_SQL_DIR)
+print(f"📁 Using SQL directory: {sql_dir}")
+  
+# -------------------------
+# Target schema (default if not provided)
+# -------------------------
+target_schema = os.environ.get("TARGET_SCHEMA", "PRESENTATION")
+print(f"🎯 Using target schema: {target_schema}")
 
 # Ordered execution of SQL files
 ordered_files = [
@@ -32,10 +45,11 @@ for file in ordered_files:
         print(f"🚀 Running {file} in {target_schema}")
         with open(path, 'r') as f:
             sql = f.read().replace('${TARGET_SCHEMA}', target_schema)
+
             # Split on semicolons, skip empty statements
             for stmt in sql.split(';'):
                 stmt = stmt.strip()
-                if stmt:  # only execute non-empty statements
+                if stmt:
                     try:
                         cur.execute(stmt)
                     except Exception as e:
