@@ -123,8 +123,9 @@ def create_rag(project_folder=None):
     tokenizer = AutoTokenizer.from_pretrained(model_name)
     model = AutoModelForCausalLM.from_pretrained(
         model_name,
-        device_map="auto",
-        torch_dtype="auto"
+        device_map="cpu",           # Force everything to CPU.  If you have a GPU change to "auto"                                     
+        low_cpu_mem_usage=False,    # Avoid lazy meta tensors.  If you have a GPU change to "auto"
+        torch_dtype="auto"          # safe dtype
     )
     pipe = pipeline(
         task="text-generation",
