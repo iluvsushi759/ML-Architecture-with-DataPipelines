@@ -172,7 +172,7 @@ def route_command(user_input: str, qa):
     # SQL
     if low.startswith("sql:") or low.startswith("sql "):
         sql = ui.split(":", 1)[1] if ":" in ui else ui.split(" ", 1)[1]
-        print("→ Running SQL query...")
+        print("→  🐎💨 Running SQL query...")
         return sql_query(sql)
 
     # show tables
