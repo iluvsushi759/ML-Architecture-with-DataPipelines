@@ -1,11 +1,11 @@
 **DataPipeline and ML Integration (still in process)**   
-
-This repo is a demo of how to perform CI/CD. There are the following scripts that have been created within this Repo:  
-
-.github/workflows/snowflake-ci-cd.yml
-ai_agents/agent.py 
-ai_agents/commands.py
-ai_agents/rag_setup 
+  
+This repo is a demo of how to perform CI/CD. These are the following scripts that have been created for this Repo:  
+  
+.github/workflows/snowflake-ci-cd.yml  
+ai_agents/agent.py   
+ai_agents/commands.py  
+ai_agents/rag_setup  
 artifacts/metrics.json  > 💡 **Note:** This will be auto generated from your train.py   
 artifacts/model.joblib  > 💡 **Note:** This will be auto generated from your train.py or train_optuna.py  
 ml/app.py  

@@ -6,7 +6,7 @@ from xgboost import XGBRegressor
 from preprocess import build_training_set
 
 def train_and_save(model_path='artifacts/model.joblib', metrics_path='artifacts/metrics.json'):
-    print("🔍 Starting build_training_set()...")
+    print("🐎💨💨Starting build_training_set()...")
     X, y, feature_cols = build_training_set()
     print(f"✅ Retrieved {len(X)} rows, {len(feature_cols)} features")
 
@@ -45,7 +45,7 @@ def train_and_save(model_path='artifacts/model.joblib', metrics_path='artifacts/
     print(f"💾 Saved model to {model_path} with RMSE={rmse:.4f}, R²={r2:.4f}")
 
 if __name__ == "__main__":
-    print("🚀 Starting training...")
+    print("🏃💨 Starting training...")
     model_path = os.environ.get('MODEL_PATH', 'artifacts/model.joblib')
     metrics_path = os.environ.get('METRICS_PATH', 'artifacts/metrics.json')
     train_and_save(model_path, metrics_path)
