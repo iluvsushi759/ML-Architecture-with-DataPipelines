@@ -3,12 +3,12 @@
 1. I would first advise you create a virtual environment for your python terminal and install your requirements (pip install -r requirements.txt)  
 2. The rag_setup.py credentials were hard-carded for snowflake originally.  I've changed this to use environment variable instead. So what you will need to do is run this in your Linux Terminal:  
   
-export SNOWFLAKE_ACCOUNT='<snowflake account>' 
-export SNOWFLAKE_USER='<snowflake user>'  
-export SNOWFLAKE_PASSWORD='<snowflake password>'  
-export SNOWFLAKE_DATABASE='<snowflake database>'  
-export SNOWFLAKE_WAREHOUSE='<snowflake warehouse>'  
-export SNOWFLAKE_SCHEMA='<snowflake schema>'  
+export SNOWFLAKE_ACCOUNT='snowflake account'  
+export SNOWFLAKE_USER='snowflake user'  
+export SNOWFLAKE_PASSWORD='snowflake password'  
+export SNOWFLAKE_DATABASE='snowflake database'  
+export SNOWFLAKE_WAREHOUSE='snowflake warehouse'  
+export SNOWFLAKE_SCHEMA='snowflake schema'  
   
 For windows terminal just change your 'export' to 'set'
   
@@ -22,7 +22,7 @@ You should see an improvement with our RMSE.  I've tuned it to 50 trials.  Pleas
 8. I've provided a sagemaker.py script to run on AWS Sagemaker Jupyter.  This would allow the same thing to run your train.py but with the ability to always tune your Instance size and having better library and framework compatibility.  
   
 **RAG and AI Agent Flow**  
-1. run your rag_setup.py file via typing in terminal: python ai_agents/app.py  
+1. If you desire to have an agent wrapped around the above process, run your agent.py file via typing in terminal: python -m ai_agents.agent
 2. Ask Away!  
   
 **Desciption of each file**  
