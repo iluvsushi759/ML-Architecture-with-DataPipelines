@@ -7,6 +7,7 @@ Drop this file into ai_agents/ (replace existing agent.py). No other files are c
 """
 print("🔵 agent.py STARTED")
 
+import readline
 import os
 import sys
 import json
@@ -172,7 +173,7 @@ def route_command(user_input: str, qa):
     # SQL
     if low.startswith("sql:") or low.startswith("sql "):
         sql = ui.split(":", 1)[1] if ":" in ui else ui.split(" ", 1)[1]
-        print("→  🐎💨 Running SQL query...")
+        print("→ Running SQL query...")
         return sql_query(sql)
 
     # show tables
@@ -222,10 +223,12 @@ def route_command(user_input: str, qa):
 
     # fallback: RAG
     try:
+        print("🤖 Thinking... please wait.")
         resp = qa.invoke({"query": ui})
         return resp.get("result", str(resp))
     except Exception as e:
         return f"RAG invocation error: {e}"
+
 
 # --- MAIN LOOP ---
 def main():
