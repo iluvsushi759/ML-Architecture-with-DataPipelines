@@ -22,7 +22,7 @@ DEFAULT_SQL_DIR = os.path.join(BASE_DIR, "sql")
 
 sql_dir = os.environ.get("SQL_DIR", DEFAULT_SQL_DIR)
 print(f"📁 Using SQL directory: {sql_dir}")
-  
+
 # -------------------------
 # Target schema (default if not provided)
 # -------------------------
