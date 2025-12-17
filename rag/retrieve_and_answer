@@ -1,0 +1,29 @@
+# retrieve_and_answer.py
+import os
+import numpy as np
+from vector_store import init_store, USE_PINECONE
+from embed import embed_texts
+
+def retrieve(query, top_k=5):
+    q_emb = embed_texts([query])[0]
+    store = init_store(dim=len(q_emb))
+    ids, dists, metadatas = None, None, None
+
+    if USE_PINECONE:
+        res = store.query(queries=[q_emb], top_k=top_k, include_metadata=True, include_values=False)
+        matches = res['matches'] if isinstance(res, dict) else res[0]['matches']
+        results = [(m['id'], m.get('score') or m.get('distance'), m.get('metadata')) for m in matches]
+    else:
+        # FAISS: do search
+        dists, idxs = store.search(np.array([q_emb]).astype('float32'), top_k)
+        # No metadata stored in this simple FAISS usage - return ids as idx
+        results = []
+        for dist, idx in zip(dists[0], idxs[0]):
+            if idx == -1:
+                continue
+            results.append((str(idx), float(dist), None))
+    return results
+
+if __name__ == "__main__":
+    query = "Which claims show unusually high amounts last week?"
+    print(retrieve(query, top_k=5))
