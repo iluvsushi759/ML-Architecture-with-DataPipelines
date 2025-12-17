@@ -41,7 +41,7 @@ def load_table(table_name, limit=None):
     print(f"Loading table: {table_name}...")
     conn = connect(**SNOWFLAKE_CONFIG)
     cs = conn.cursor()
-    query = f"SELECT * FROM {table_name}"
+    query = f"SELECT * FROM PRESENTATION.{table_name}"
     if limit:
         query += f" LIMIT {limit}"
     cs.execute(query)
