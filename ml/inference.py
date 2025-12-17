@@ -38,5 +38,5 @@ def predict(payload=None):
     pred = _model.predict(row)
     return float(pred[0])
 
-print(predict({"AGE":30, "GENDER_BIN":0, "PLAN_TYPE":1}))
-print(predict({"AGE":65, "GENDER_BIN":1, "PLAN_TYPE":3}))
+# print(predict({"AGE":30, "GENDER_BIN":0, "PLAN_TYPE":1}))
+# print(predict({"AGE":65, "GENDER_BIN":1, "PLAN_TYPE":3}))
