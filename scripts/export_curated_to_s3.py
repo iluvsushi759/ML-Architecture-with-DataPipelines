@@ -6,11 +6,11 @@ import boto3
 # 1️⃣ Configuration
 # -----------------------------
 SNOWFLAKE_CONFIG = {
-    "user": "iluvsushi",
-    "password": "Kamronsui1!!!!",
-    "account": "nkoyqld-toc82072",
-    "warehouse": "COMPUTE_WH",
-    "database": "INSURANCE_DB",
+    "user": "<>",
+    "password": "<>",
+    "account": "<>",
+    "warehouse": "<>",
+    "database": "<>",
     "schema": "CURATED"
 }
 
