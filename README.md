@@ -1,6 +1,79 @@
 **DataPipeline and ML Integration (still in process)**   
 
-This repo is a demo of how to perform CI/CD. There are the following scripts that have been created within this Repo:  
+Enterprise AI Reference Architecture: Snowflake + AWS + MLOps + RAG Agents.
+
+Architecture:
+
+                         USERS
+                           |
+                           |
+                    Streamlit App
+                           |
+                           |
+                 --------------------
+                 |                  |
+            ML Prediction       RAG Agent
+                 |                  |
+                 |                  |
+              FastAPI          Vector Store
+                 |                  |
+                 |                  |
+        -------------------------------
+                       |
+                       |
+                 Snowflake Platform
+                       |
+        ---------------------------------
+        |                               |
+   Raw Data Layer                 ML Feature Layer
+        |                               |
+        |                               |
+    S3 Landing                   Feature Engineering
+        |
+        |
+ Data Quality Checks
+        |
+        |
+   Curated Dataset
+        |
+        |
+ -------------------------------
+ |
+ |
+ML Training Pipeline
+ |
+ |
+XGBoost / Optuna
+ |
+ |
+Model Artifact
+ |
+ |
+MLflow Tracking
+ |
+ |
+Model Registry
+ |
+ |
+Deployment
+ |
+ |
+Monitoring
+ |
+ |
+Retraining Trigger
+
+
+                 CI/CD
+                   |
+             GitHub Actions
+                   |
+        ---------------------
+        |                   |
+ Snowflake Deployment   ML Deployment
+
+ 
+There are the following scripts that have been created within this Repo:  
   
 .github/workflows/ml-ci-cd.yml  
 .github/workflows/snowflake-ci-cd.yml  
