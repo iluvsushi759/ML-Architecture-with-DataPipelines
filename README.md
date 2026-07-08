@@ -4,7 +4,7 @@ Enterprise AI Reference Architecture: Snowflake + AWS + MLOps + RAG Agents.
 
 Architecture:
 
-![AI Platform Architecture](docs/images/architecture.png)
+![AI Platform Architecture](docs/images/Architecture.png)
 
 
 There are the following scripts that have been created within this Repo:  
