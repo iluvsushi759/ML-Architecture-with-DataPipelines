@@ -91,3 +91,6 @@ This demo can be also used in other applications such as:
 Pull Request to main:  
  - Team reviews the change (code review, lint checks, CI results).  
  - Ensures the change is intentional, correct, and compliant.
+
+ Goto README2.md to see the AI/LLM portion
+ 
