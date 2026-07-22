@@ -1,6 +1,13 @@
 **DataPipeline and ML Integration (still in process)**   
 
-This repo is a demo of how to perform CI/CD. There are the following scripts that have been created within this Repo:  
+Enterprise AI Reference Architecture: Snowflake + AWS + MLOps + RAG Agents.
+
+Architecture:
+
+![AI Platform Architecture](docs/images/Architecture.png)
+
+
+There are the following scripts that have been created within this Repo:  
   
 .github/workflows/ml-ci-cd.yml  
 .github/workflows/snowflake-ci-cd.yml  
@@ -84,3 +91,6 @@ This demo can be also used in other applications such as:
 Pull Request to main:  
  - Team reviews the change (code review, lint checks, CI results).  
  - Ensures the change is intentional, correct, and compliant.
+
+ Goto README2.md to see the AI/LLM portion
+ 
